@@ -25,4 +25,9 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v .
+      run:
+        sh preprocess.sh
+        go build -v .
+      env:
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
