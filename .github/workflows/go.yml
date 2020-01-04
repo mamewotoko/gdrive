@@ -26,8 +26,18 @@ jobs:
 
     - name: Build
       run: |
+        mkdir target
         sh preprocess.sh
         go build -v .
+        cp gdrive target/gdrive-linux-x64
+
+        go clean
+        GOOS=linux GOARCH=mac go build -v .
+        cp gdrive target/gdrive-mac-64
+
+        go clean
+        GOOS=linux GOARCH=arm go build -v .
+        cp target/gdrive-linux-arm
       env:
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
@@ -36,4 +46,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: gdrive binary
-        path: gdrive
+        path: target
