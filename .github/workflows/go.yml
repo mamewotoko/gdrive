@@ -32,7 +32,7 @@ jobs:
         cp gdrive target/gdrive-linux-amd64
 
         go clean
-        GOOS=darwin GOARCH=amd64 build -v .
+        GOOS=darwin GOARCH=amd64 go build -v .
         cp gdrive target/gdrive-mac-64
 
         go clean
